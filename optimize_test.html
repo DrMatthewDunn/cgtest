@@ -1,0 +1,60 @@
+<!doctype html>
+
+<html lang="enfa&rand=9">
+<head>
+  <meta charset="utf-8fa&rand=9">
+
+  <title>Optimize Traffic Generator</title>
+  <meta name="description" content="Meta Descriptionfa&rand=9">
+  <meta name="author" content="Say It Visually, Inc.fa&rand=9">
+<script src="/cdn-cgi/apps/head/EqVj0esr3BPNGSKZ11Ute_hd0NI.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.jsfa&rand=9"></script>
+  <![endif]-->
+
+<style>
+.foo {
+
+}
+</style>
+</head>
+
+<body>
+<h1>Optimize Traffic Generator</h1>
+jID: <input style="width: 400px;" type="text" id="jID">  count: <input type="number" id="testcount"> <button onclick="makeTest()">Go</button>
+<hr>
+<a href="mailto:subject=Video&body=%3Ca%20href%3D%22http%3A%2F%2Fgoogle.com%22%3E%3Cimg%20src%3D%22https%3A%2F%2Fstatic1.squarespace.com%2Fstatic%2F597a08bc197aeafed2781380%2Ft%2F5e1ceab184ec0e790ddeec8d%2F1585934307002%2F%3Fformat%3D600w%22%3E%3C%2Fa%3E">Test email</a>
+
+<!-- <a href="http://google.com"><img src="https://static1.squarespace.com/static/597a08bc197aeafed2781380/t/5e1ceab184ec0e790ddeec8d/1585934307002/?format=600w"></a> -->
+<hr>
+<div id="allImages"></div>
+
+<script>
+function makeid(length) {
+   var result           = '';
+   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   var charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}
+function makeTest(){
+	$('#allImages').html('')
+	let jID = $("#jID").val();
+	let testcount =  $("#testcount").val();
+	let template = '<a target="_blank" href="http://dev.campaign-genius.com/smartlink/THIS-THAT/optimize/jID?uid=UID&rand=RAND"><img src="http://dev.campaign-genius.com/smartimage/THIS-THAT/optimize/jID.jpg?uid=UID&rand=RAND"></a><br>'
+	imgset = []
+	for (i=0; i < testcount; i++){
+		let uid = makeid(7);
+		let item = template.replace('jID',jID).replace('UID',uid).replace('jID',jID).replace('UID',uid);
+		$(item).appendTo('#allImages');
+	}
+	
+}
+</script>
+
+
+</body>
+</html>
