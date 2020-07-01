@@ -50,7 +50,7 @@ function makeTest(){
 	let testcount =  $("#testcount").val();
 	let endpoint = $("#endpoint").val();
 	let imgwidth = $("#imgwidth").val();
-	let template = '<a target="_blank" href="http://'+ endpoint + '.campaign-genius.com/smartlink/THIS-THAT/optimize/jID?uid=UID&rand=RAND"><img style="margin: 6px;width: '+ imgwidth + 'px;" src="http://'+ endpoint + '.campaign-genius.com/smartimage/THIS-THAT/optimize/jID.jpg?uid=UID&rand=RAND"></a><br>'
+	let template = '<a target="_blank" href="https://'+ endpoint + '.campaign-genius.com/smartlink/THIS-THAT/optimize/jID?uid=UID&rand=RAND"><img style="margin: 6px;width: '+ imgwidth + 'px;" src="http://'+ endpoint + '.campaign-genius.com/smartimage/THIS-THAT/optimize/jID.jpg?uid=UID&rand=RAND"></a><br>'
 	imgset = []
 	for (i=0; i < testcount; i++){
 		let uid = makeid(7);
