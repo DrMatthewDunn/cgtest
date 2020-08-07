@@ -1,0 +1,66 @@
+<!doctype html>
+
+<html lang="enfa&rand=9">
+<head>
+  <meta charset="utf-8fa&rand=9">
+
+  <title>Geo Traffic Generator</title>
+  <meta name="description" content="Meta Descriptionfa&rand=9">
+  <meta name="author" content="Say It Visually, Inc.fa&rand=9">
+<script src="/cdn-cgi/apps/head/EqVj0esr3BPNGSKZ11Ute_hd0NI.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.jsfa&rand=9"></script>
+  <![endif]-->
+
+<style>
+.foo {
+
+}
+</style>
+</head>
+
+<body>
+<h1 style="text-align: center; margin-bottom: 2em;">Optimize Traffic Generator</h1>
+<div style="margin-left: 3em;">
+jID: <input style="width: 300px;" type="text" id="jID">  count: <input style="width: 60px;" type="number" value="10" id="testcount">  width: <input style="width: 60px;" type="number" value="100" id="imgwidth"> 
+<label for="endpoint">Production or Dev</label>
+<select name="endpoint" id="endpoint">
+	<option value="app" selected>Production</option>
+	<option value="dev">Development</option>	
+</select>
+<button onclick="makeTest()">Go</button>
+</div>
+<hr>
+<div style="display: flex;flex-wrap: wrap;" id="allImages"></div>
+
+<script>
+function makeid(length) {
+   var result           = '';
+   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   var charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}
+function makeTest(){
+	$('#allImages').html('')
+	let jID = $("#jID").val();
+	let testcount =  $("#testcount").val();
+	let endpoint = $("#endpoint").val();
+	let imgwidth = $("#imgwidth").val();
+	let template = '<a target="_blank" href="https://'+ endpoint + '.campaign-genius.com/smartlink/THIS-THAT/geo/jID?uid=UID&rand=RAND"><img style="margin: 6px;width: '+ imgwidth + 'px;" src="http://'+ endpoint + '.campaign-genius.com/smartimage/THIS-THAT/geo/jID.jpg?tool=Geo&uid=UID&rand=RAND"></a><br>'
+	imgset = []
+	for (i=0; i < testcount; i++){
+		let uid = makeid(7);
+		let item = template.replace('jID',jID).replace('UID',uid).replace('jID',jID).replace('UID',uid);
+		$(item).appendTo('#allImages');
+	}
+	
+}
+</script>
+
+
+</body>
+</html>
