@@ -1,0 +1,111 @@
+<!doctype html>
+
+<html lang="enfa&rand=9">
+<head>
+  <meta charset="utf-8fa&rand=9">
+
+  <title>Campaign Genius Bulk Image Tests</title>
+  <meta name="description" content="Meta Descriptionfa&rand=9">
+  <meta name="author" content="Say It Visually, Inc.fa&rand=9">
+<script src="/cdn-cgi/apps/head/EqVj0esr3BPNGSKZ11Ute_hd0NI.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.jsfa&rand=9"></script>
+  <![endif]-->
+
+<style>
+.foo {
+
+}
+</style>
+</head>
+
+<body>
+<h1 style="text-align: center; margin-bottom: 2em;">Campaign Genius Bulk Image Tests</h1>
+<div style="margin-left: 3em;">
+Template ID: <input style="width: 8em;" type="text" id="templateID" placeholder="This-That">   width: <input style="width: 60px;" type="number" value="100" id="imgwidth"> 
+<label for="endpoint">Production or Dev</label>
+<select name="endpoint" id="endpoint">
+	<option value="app" selected>Production</option>
+	<option value="dev">Development</option>	
+</select>
+<button onclick="makeTest()">Go</button>
+</div>
+<div style="margin-left: 3em;margin-top: 1em;">
+    <label for="mergedata">Merge Data; Field Names In Top Row</label>
+    <textarea cols="60" rows="5" type="textarea" id="mergedata"></textarea>
+</div>
+<hr>
+<div style="display: flex;flex-wrap: wrap;" id="allImages"></div>
+
+<script>
+function makeid(length) {
+   var result           = '';
+   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   var charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}
+function MakeQueryStr(fieldset,skipval){
+    fieldpairs = []
+    for (let [field, fval] of Object.entries(fieldset)) {
+    if (fval != skipval && fval != ""){
+            fieldpairs.push(encodeURI(field + '=' + fval));
+        }
+    }
+    var querystr = fieldpairs.join('&');
+    if (querystr != '&'){
+        return '?' + querystr
+    } else {
+        return "";
+    }
+}
+function parseData(){
+    var lines = $("#mergedata").val().split('\n');
+    var fieldnames = lines.shift(0).split('\t');
+    let queryset = []
+    for (var i=0; i < lines.length; i++){
+        let row = {};
+        let cols = lines[i].split('\t');
+        for (var c=0; c < cols.length; c++){
+            row[fieldnames[c]] = cols[c]
+        }
+        row['id'] = makeid(10);
+        row['miwidth'] = $("#imgwidth").val();
+        queryset.push(MakeQueryStr(row))
+    }
+    return queryset;
+}
+function makeTest(){
+    $("#allImages").html('');
+    var queryset = parseData();
+	let imgwidth = $("#imgwidth").val();
+    var host = $("#endpoint").val();
+    var templateID = $("#templateID").val()
+    for (var i=0; i < queryset.length; i++){
+        let url = `https://${host}.campaign-genius.com/img/${templateID}.jpg${queryset[i]}`
+        let img = `<img style="margin: 1em; width: ${imgwidth}px;" src="${url}">`
+        $(img).appendTo('#allImages')
+    }
+  
+	let template = '<a target="_blank" href="https://'+ endpoint + '.campaign-genius.com/smartlink/THIS-THAT/optimize/jID?uid=UID&rand=RAND"><img style="margin: 6px;width: '+ imgwidth + 'px;" src="http://'+ endpoint + '.campaign-genius.com/smartimage/THIS-THAT/optimize/jID.jpg?uid=UID&rand=RAND"></a><br>'
+
+	$('#allImages').html('')
+	let jID = $("#jID").val();
+	let testcount =  $("#testcount").val();
+	let endpoint = $("#endpoint").val();
+	imgset = []
+	for (i=0; i < testcount; i++){
+		let uid = makeid(7);
+		let item = template.replace('jID',jID).replace('UID',uid).replace('jID',jID).replace('UID',uid);
+		$(item).appendTo('#allImages');
+	}
+	
+}
+</script>
+
+
+</body>
+</html>
